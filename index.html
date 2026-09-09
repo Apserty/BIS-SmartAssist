@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>BIS SmartAssist | SIH Prototype</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        /* =====================================================
+           LIVE DASHBOARD
+        ===================================================== */
+
+        .dashboard-section {
+
+            padding: 60px 0;
+
+            background: #f5f8fd;
+
+        }
+
+
+        .dashboard-stats {
+
+            display: grid;
+
+            grid-template-columns:
+            repeat(3, 1fr);
+
+            gap: 25px;
+
+            margin-top: 35px;
+
+        }
+
+
+        .dashboard-stat {
+
+            background: white;
+
+            padding: 30px;
+
+            text-align: center;
+
+            border: 1px solid #dbe3f0;
+
+            border-top: 4px solid #264796;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.06);
+
+        }
+
+
+        .stat-number {
+
+            font-size: 38px;
+
+            font-weight: 700;
+
+            color: #264796;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .stat-label {
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            color: #444;
+
+        }
+
+
+        .dashboard-error {
+
+            text-align: center;
+
+            color: #8a1c1c;
+
+            background: #fff1f1;
+
+            border-left: 4px solid #d93025;
+
+            padding: 15px;
+
+            margin-top: 25px;
+
+            display: none;
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .dashboard-stats {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GOVERNMENT BAR
+===================================================== -->
+
+<div class="gov-bar">
+
+    <div>
+        Government of India
+    </div>
+
+    <div>
+
+        <a href="#">
+            हिन्दी
+        </a>
+
+        <span>|</span>
+
+        <a href="#">
+            English
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="header-container">
+
+
+        <div class="brand">
+
+            <img
+                src="assets/bis-logo.png"
+                alt="BIS SmartAssist"
+                class="logo"
+            >
+
+
+            <div class="brand-text">
+
+                <h1>
+                    Bureau of Indian Standards
+                </h1>
+
+                <p>
+
+                    BIS SmartAssist
+
+                    <span>
+                        • SIH Prototype
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="header-right">
+
+
+            <div class="top-links">
+
+                <a href="#">
+                    Skip to Main Content
+                </a>
+
+                <a href="#">
+                    A-
+                </a>
+
+                <a href="#">
+                    A
+                </a>
+
+                <a href="#">
+                    A+
+                </a>
+
+            </div>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    placeholder="Search BIS..."
+                >
+
+                <button>
+                    🔍
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+
+        <a href="index.html">
+            Home
+        </a>
+
+
+        <a href="#">
+            About Us
+        </a>
+
+
+        <a href="pages/standards.html">
+            Standards
+        </a>
+
+
+        <a href="pages/certification.html">
+            Conformity Assessment
+        </a>
+
+
+        <a href="pages/laboratories.html">
+            Laboratory Services
+        </a>
+
+
+        <a href="pages/hallmarking.html">
+            Hallmarking
+        </a>
+
+
+        <a href="pages/training.html">
+            Training
+        </a>
+
+
+        <a href="pages/consumer.html">
+            Consumer Engagement
+        </a>
+
+
+        <a href="pages/assistant.html"
+           class="ai-nav">
+
+            🤖 SmartAssist
+
+        </a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     PROTOTYPE NOTICE
+===================================================== -->
+
+<div class="prototype-bar">
+
+    <strong>
+        SIH 2026 Prototype:
+    </strong>
+
+    BIS SmartAssist is an AI-powered assistance layer
+    designed to simplify access to BIS standards and services.
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+
+    <img
+        src="assets/bis-building.jpg.png"
+        alt="BIS Building"
+    >
+
+
+    <div class="hero-overlay">
+
+
+        <div class="hero-content">
+
+
+            <h2>
+
+                We're BIS,
+
+                <br>
+
+                The National Standards Body of India
+
+            </h2>
+
+
+            <p>
+
+                Developing standards, supporting conformity assessment,
+                laboratory services, hallmarking and consumer empowerment.
+
+            </p>
+
+
+            <a
+                href="pages/assistant.html"
+                class="hero-button"
+            >
+
+                Ask BIS SmartAssist
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     LIVE DASHBOARD
+===================================================== -->
+
+<section class="dashboard-section">
+
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+
+            <span>
+                BIS SMARTASSIST
+            </span>
+
+
+            <h2>
+                Live Service Overview
+            </h2>
+
+
+            <p>
+
+                Explore BIS standards, laboratories and services
+                through SmartAssist.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="dashboard-stats">
+
+
+            <!-- STANDARDS -->
+
+            <div class="dashboard-stat">
+
+                <div
+                    class="stat-number"
+                    id="standardsCount"
+                >
+                    —
+                </div>
+
+
+                <div class="stat-label">
+
+                    Indian Standards
+
+                </div>
+
+            </div>
+
+
+            <!-- LABORATORIES -->
+
+            <div class="dashboard-stat">
+
+                <div
+                    class="stat-number"
+                    id="labsCount"
+                >
+                    —
+                </div>
+
+
+                <div class="stat-label">
+
+                    BIS Laboratories
+
+                </div>
+
+            </div>
+
+
+            <!-- SERVICES -->
+
+            <div class="dashboard-stat">
+
+                <div
+                    class="stat-number"
+                    id="servicesCount"
+                >
+                    —
+                </div>
+
+
+                <div class="stat-label">
+
+                    BIS Services
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div
+            id="dashboardError"
+            class="dashboard-error"
+        >
+
+            Unable to load live dashboard data.
+            Please make sure the BIS SmartAssist backend is running.
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     AI ASSISTANT
+===================================================== -->
+
+<section class="smartassist-section">
+
+
+    <div class="section-container">
+
+
+        <div class="smartassist-content">
+
+
+            <span class="section-label">
+
+                AI-POWERED BIS ASSISTANCE
+
+            </span>
+
+
+            <h2>
+
+                Meet BIS SmartAssist
+
+            </h2>
+
+
+            <p>
+
+                Your intelligent guide to Indian Standards,
+                certification, laboratories, hallmarking
+                and BIS services.
+
+            </p>
+
+
+            <div class="assistant-search">
+
+
+                <input
+                    id="homeQuestion"
+                    type="text"
+                    placeholder="Ask something about BIS..."
+                >
+
+
+                <button
+                    onclick="askHomeQuestion()"
+                >
+
+                    Ask SmartAssist
+
+                </button>
+
+
+            </div>
+
+
+            <div class="suggested-questions">
+
+
+                <button
+                    onclick="setQuestion('What is an Indian Standard?')"
+                >
+
+                    What is an Indian Standard?
+
+                </button>
+
+
+                <button
+                    onclick="setQuestion('How can I get BIS certification?')"
+                >
+
+                    How can I get BIS certification?
+
+                </button>
+
+
+                <button
+                    onclick="setQuestion('How can I find a BIS laboratory?')"
+                >
+
+                    Find a laboratory
+
+                </button>
+
+
+                <button
+                    onclick="setQuestion('What is BIS hallmarking?')"
+                >
+
+                    Explain hallmarking
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="smartassist-image">
+
+
+            <img
+                src="assets/smart-assistant.png"
+                alt="BIS SmartAssist AI"
+            >
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="services-section">
+
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+
+            <span>
+                BIS SERVICES
+            </span>
+
+
+            <h2>
+                Explore BIS Services
+            </h2>
+
+
+            <p>
+
+                Access important BIS information through
+                a simple and intelligent interface.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="service-grid">
+
+
+            <!-- STANDARD -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/standards.jpg.png"
+                    alt="Standards"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Know Your Standard
+                    </h3>
+
+
+                    <p>
+
+                        Find Indian Standards using a
+                        standard number or product keyword.
+
+                    </p>
+
+
+                    <a href="pages/standards.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CERTIFICATION -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/certification.jpg.png"
+                    alt="Product Certification"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Product Certification
+                    </h3>
+
+
+                    <p>
+
+                        Understand certification requirements,
+                        procedures and related BIS services.
+
+                    </p>
+
+
+                    <a href="pages/certification.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- LABORATORY -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/laboratory.jpg.png"
+                    alt="Laboratory Services"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Laboratory Services
+                    </h3>
+
+
+                    <p>
+
+                        Discover testing facilities and
+                        BIS recognised laboratories.
+
+                    </p>
+
+
+                    <a href="pages/laboratories.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- HALLMARKING -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/hallmarking.jpg.png"
+                    alt="Hallmarking"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Hallmarking
+                    </h3>
+
+
+                    <p>
+
+                        Understand hallmarking and
+                        access related BIS information.
+
+                    </p>
+
+
+                    <a href="pages/hallmarking.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CONSUMER -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/consumer.jpg.png"
+                    alt="Consumer Engagement"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Consumer Engagement
+                    </h3>
+
+
+                    <p>
+
+                        Access consumer awareness,
+                        complaints and safety information.
+
+                    </p>
+
+
+                    <a href="pages/consumer.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- TRAINING -->
+
+            <div class="service-card">
+
+
+                <img
+                    src="assets/training.jpg.png"
+                    alt="Training"
+                >
+
+
+                <div class="card-content">
+
+
+                    <h3>
+                        Training & Capacity Building
+                    </h3>
+
+
+                    <p>
+
+                        Explore training programmes,
+                        workshops and learning resources.
+
+                    </p>
+
+
+                    <a href="pages/training.html">
+                        Explore →
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     HOW SMARTASSIST WORKS
+===================================================== -->
+
+<section class="how-section">
+
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+
+            <span>
+                SMART AUTOMATION
+            </span>
+
+
+            <h2>
+                How BIS SmartAssist Works
+            </h2>
+
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    01
+                </div>
+
+
+                <h3>
+                    Ask
+                </h3>
+
+
+                <p>
+
+                    Ask a question using natural language
+                    or voice.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    02
+                </div>
+
+
+                <h3>
+                    Understand
+                </h3>
+
+
+                <p>
+
+                    AI identifies your intent and
+                    required BIS service.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    03
+                </div>
+
+
+                <h3>
+                    Retrieve
+                </h3>
+
+
+                <p>
+
+                    Relevant information is retrieved
+                    from the BIS knowledge base.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="step">
+
+
+                <div class="step-number">
+                    04
+                </div>
+
+
+                <h3>
+                    Assist
+                </h3>
+
+
+                <p>
+
+                    SmartAssist provides an answer
+                    with official source references.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     WHAT'S NEW
+===================================================== -->
+
+<section class="news-section">
+
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+
+            <span>
+                INFORMATION
+            </span>
+
+
+            <h2>
+                What's New
+            </h2>
+
+
+        </div>
+
+
+        <div class="news-list">
+
+
+            <div class="news-item">
+
+
+                <span>
+                    NEW
+                </span>
+
+
+                <p>
+
+                    BIS standards and service information
+                    can be accessed through SmartAssist.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="news-item">
+
+
+                <span>
+                    AI
+                </span>
+
+
+                <p>
+
+                    Intelligent search helps users find
+                    relevant standards faster.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="news-item">
+
+
+                <span>
+                    SMART
+                </span>
+
+
+                <p>
+
+                    Natural-language assistance simplifies
+                    navigation across BIS services.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-container">
+
+
+        <div>
+
+
+            <h3>
+                BIS SmartAssist
+            </h3>
+
+
+            <p>
+
+                AI-powered assistance for Indian Standards
+                and BIS services.
+
+            </p>
+
+
+        </div>
+
+
+        <div>
+
+
+            <h4>
+                Quick Links
+            </h4>
+
+
+            <a href="pages/standards.html">
+                Standards
+            </a>
+
+
+            <a href="pages/certification.html">
+                Certification
+            </a>
+
+
+            <a href="pages/laboratories.html">
+                Laboratories
+            </a>
+
+
+            <a href="pages/assistant.html">
+                SmartAssist
+            </a>
+
+
+        </div>
+
+
+        <div>
+
+
+            <h4>
+                Important
+            </h4>
+
+
+            <a
+                href="https://www.bis.gov.in/?lang=en"
+                target="_blank"
+            >
+
+                Official BIS Website
+
+            </a>
+
+
+            <a
+                href="https://www.bis.gov.in/know-your-standard/?lang=en"
+                target="_blank"
+            >
+
+                Know Your Standard
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 BIS SmartAssist — SIH Prototype
+
+    </div>
+
+
+</footer>
+
+
+<!-- =====================================================
+     DASHBOARD API
+===================================================== -->
+
+<script>
+
+const DASHBOARD_API =
+    "http://127.0.0.1:8000/api/dashboard";
+
+
+async function loadDashboard() {
+
+    try {
+
+
+        const response =
+            await fetch(DASHBOARD_API);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Unable to load dashboard data."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const dashboard =
+            data.dashboard;
+
+
+        const statistics =
+            dashboard.statistics;
+
+
+        /*
+         * Update live statistics
+         */
+
+        document.getElementById(
+            "standardsCount"
+        ).textContent =
+            statistics.standards;
+
+
+        document.getElementById(
+            "labsCount"
+        ).textContent =
+            statistics.laboratories;
+
+
+        document.getElementById(
+            "servicesCount"
+        ).textContent =
+            statistics.services;
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Dashboard API Error:",
+            error
+        );
+
+
+        document.getElementById(
+            "dashboardError"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "standardsCount"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "labsCount"
+        ).textContent =
+            "—";
+
+
+        document.getElementById(
+            "servicesCount"
+        ).textContent =
+            "—";
+
+    }
+
+}
+
+
+/*
+ * Load dashboard when page opens
+ */
+
+loadDashboard();
+
+</script>
+
+
+<!-- =====================================================
+     EXISTING JAVASCRIPT
+===================================================== -->
+
+<script src="js/script.js"></script>
+
+
+</body>
+
+</html>

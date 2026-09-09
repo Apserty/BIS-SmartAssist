@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Hallmarking | BIS SmartAssist</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<style>
+
+.hallmark-hero {
+
+background:
+linear-gradient(
+120deg,
+#102f72,
+#264796
+);
+
+color: white;
+
+padding: 60px 0;
+
+}
+
+.hallmark-content {
+
+padding: 60px 0;
+
+}
+
+.hallmark-grid {
+
+display: grid;
+
+grid-template-columns:
+repeat(3, 1fr);
+
+gap: 22px;
+
+}
+
+.hallmark-card {
+
+background: white;
+
+padding: 25px;
+
+border: 1px solid #ddd;
+
+box-shadow:
+0 4px 15px rgba(0,0,0,.06);
+
+border-radius: 6px;
+
+}
+
+.hallmark-card h3 {
+
+color: #264796;
+
+margin-bottom: 10px;
+
+}
+
+.hallmark-card p {
+
+line-height: 1.7;
+
+color: #444;
+
+}
+
+.huid {
+
+background: #eef4ff;
+
+padding: 25px;
+
+margin-top: 35px;
+
+border-left: 5px solid #264796;
+
+}
+
+.huid h3 {
+
+color: #264796;
+
+}
+
+.huid p {
+
+line-height: 1.7;
+
+}
+
+.dynamic-section {
+
+margin-top: 35px;
+
+}
+
+.dynamic-section h3 {
+
+color: #264796;
+
+margin-bottom: 15px;
+
+}
+
+.standard-list {
+
+display: grid;
+
+grid-template-columns:
+repeat(2, 1fr);
+
+gap: 15px;
+
+}
+
+.standard-item {
+
+background: #f8faff;
+
+border: 1px solid #dbe5f5;
+
+padding: 18px;
+
+border-radius: 6px;
+
+}
+
+.standard-item strong {
+
+display: block;
+
+color: #264796;
+
+margin-bottom: 6px;
+
+}
+
+.loading {
+
+text-align: center;
+
+padding: 30px;
+
+color: #264796;
+
+}
+
+.error {
+
+background: #fff1f1;
+
+border-left: 5px solid #d93025;
+
+padding: 20px;
+
+color: #8a1c1c;
+
+}
+
+.link-grid {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 12px;
+
+margin-top: 20px;
+
+}
+
+.official-link {
+
+display: inline-block;
+
+padding: 12px 18px;
+
+background: #264796;
+
+color: white;
+
+text-decoration: none;
+
+border-radius: 4px;
+
+font-weight: 600;
+
+}
+
+.official-link:hover {
+
+background: #102f72;
+
+}
+
+@media(max-width:800px) {
+
+.hallmark-grid {
+
+grid-template-columns: 1fr;
+
+}
+
+.standard-list {
+
+grid-template-columns: 1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GOVERNMENT BAR
+===================================================== -->
+
+<div class="gov-bar">
+
+<div>
+Government of India
+</div>
+
+<div>
+BIS SmartAssist — SIH Prototype
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="header-container">
+
+<div class="brand">
+
+<img
+src="../assets/bis-logo.png"
+class="logo"
+alt="BIS">
+
+<div class="brand-text">
+
+<h1>
+Bureau of Indian Standards
+</h1>
+
+<p>
+BIS SmartAssist
+<span>• SIH Prototype</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="../index.html">
+Home
+</a>
+
+<a href="standards.html">
+Standards
+</a>
+
+<a href="certification.html">
+Certification
+</a>
+
+<a href="laboratories.html">
+Laboratories
+</a>
+
+<a href="hallmarking.html">
+Hallmarking
+</a>
+
+<a href="consumer.html">
+Consumer
+</a>
+
+<a href="training.html">
+Training
+</a>
+
+<a href="assistant.html"
+class="ai-nav">
+🤖 SmartAssist
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hallmark-hero">
+
+<div class="section-container">
+
+<span>
+HALLMARKING
+</span>
+
+<h1>
+BIS Hallmarking
+</h1>
+
+<p>
+Understand purity, hallmarking and
+HUID verification through SmartAssist.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<section class="hallmark-content">
+
+<div class="section-container">
+
+
+<div class="section-heading">
+
+<span>
+QUALITY • PURITY • TRUST
+</span>
+
+<h2>
+Hallmarking Information
+</h2>
+
+</div>
+
+
+<!-- =====================================================
+     DYNAMIC CONTENT
+===================================================== -->
+
+<div id="hallmarkingContent">
+
+<div class="loading">
+
+Loading BIS Hallmarking information...
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+const API_URL =
+"http://127.0.0.1:8000/api/hallmarking";
+
+
+async function loadHallmarking() {
+
+const container =
+document.getElementById(
+"hallmarkingContent"
+);
+
+
+try {
+
+
+const response =
+await fetch(API_URL);
+
+
+if (!response.ok) {
+
+throw new Error(
+"Unable to connect to BIS SmartAssist API."
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+const info =
+data.hallmarking;
+
+
+/* =====================================================
+   MAIN INFORMATION CARDS
+===================================================== */
+
+const cards = [
+
+{
+
+title: "What is Hallmarking?",
+
+content:
+info.description
+
+},
+
+{
+
+title: "Precious Metals Covered",
+
+content:
+info.metals.join(" and ")
+
+},
+
+{
+
+title: info.consumer_verification.title,
+
+content:
+info.consumer_verification.description
+
+}
+
+];
+
+
+let html = `
+
+<div class="hallmark-grid">
+
+${cards.map(card => `
+
+<div class="hallmark-card">
+
+<h3>
+${card.title}
+</h3>
+
+<p>
+${card.content}
+</p>
+
+</div>
+
+`).join("")}
+
+</div>
+
+`;
+
+
+/* =====================================================
+   HUID SECTION
+===================================================== */
+
+html += `
+
+<div class="huid">
+
+<h3>
+🔎 ${info.huid.title}
+</h3>
+
+<p>
+${info.huid.description}
+</p>
+
+<br>
+
+<a
+href="${info.official_links.bis_care}"
+target="_blank"
+class="hero-button">
+
+Verify through BIS CARE →
+
+</a>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   HALLMARK COMPONENTS
+===================================================== */
+
+html += `
+
+<div class="dynamic-section">
+
+<h3>
+🏷️ What does a gold hallmark contain?
+</h3>
+
+<div class="standard-list">
+
+${info.hallmark_components.map(
+(item, index) => `
+
+<div class="standard-item">
+
+<strong>
+${index + 1}. ${item}
+</strong>
+
+<span>
+Official BIS hallmark information
+</span>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   JEWELLER INFORMATION
+===================================================== */
+
+html += `
+
+<div class="dynamic-section">
+
+<div class="hallmark-card">
+
+<h3>
+🏪 ${info.jeweller_registration.title}
+</h3>
+
+<p>
+${info.jeweller_registration.description}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   OFFICIAL BIS SOURCES
+===================================================== */
+
+html += `
+
+<div class="dynamic-section">
+
+<h3>
+🔗 Official BIS Resources
+</h3>
+
+<div class="link-grid">
+
+<a
+href="${info.official_links.hallmarking_overview}"
+target="_blank"
+class="official-link">
+
+Hallmarking Overview →
+
+</a>
+
+<a
+href="${info.official_links.hallmarking_faq}"
+target="_blank"
+class="official-link">
+
+Hallmarking FAQ →
+
+</a>
+
+<a
+href="${info.official_links.bis_care}"
+target="_blank"
+class="official-link">
+
+BIS CARE App →
+
+</a>
+
+<a
+href="${info.official_links.jeweller_registration}"
+target="_blank"
+class="official-link">
+
+Jeweller Registration →
+
+</a>
+
+<a
+href="${info.official_links.hallmarking_centres}"
+target="_blank"
+class="official-link">
+
+Hallmarking Centres →
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   INSERT CONTENT
+===================================================== */
+
+container.innerHTML = html;
+
+
+}
+
+catch (error) {
+
+
+container.innerHTML = `
+
+<div class="error">
+
+<h3>
+Unable to load Hallmarking information
+</h3>
+
+<p>
+${error.message}
+</p>
+
+<p>
+Please make sure the BIS SmartAssist
+backend server is running.
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD PAGE
+===================================================== */
+
+loadHallmarking();
+
+</script>
+
+
+</body>
+
+</html>

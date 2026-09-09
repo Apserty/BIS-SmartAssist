@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Laboratory Finder | BIS SmartAssist</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<style>
+
+.lab-page {
+
+    padding:60px 0;
+
+    background:#f5f7fb;
+
+    min-height:650px;
+}
+
+.lab-search {
+
+    background:white;
+
+    padding:30px;
+
+    border:1px solid #ddd;
+
+    margin-bottom:35px;
+}
+
+.lab-search input {
+
+    width:100%;
+
+    height:50px;
+
+    padding:0 15px;
+
+    border:1px solid #ccc;
+
+    margin-bottom:12px;
+
+    box-sizing:border-box;
+
+    font-size:15px;
+}
+
+.lab-search button {
+
+    background:#264796;
+
+    color:white;
+
+    border:none;
+
+    padding:13px 22px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.lab-search button:hover {
+
+    background:#1d397b;
+}
+
+.lab-info {
+
+    margin-bottom:20px;
+
+    font-size:15px;
+
+    color:#555;
+}
+
+.lab-grid {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:20px;
+}
+
+.lab-card {
+
+    background:white;
+
+    padding:25px;
+
+    border:1px solid #ddd;
+
+    border-top:4px solid #264796;
+
+    box-shadow:0 2px 8px rgba(0,0,0,0.04);
+}
+
+.lab-card h3 {
+
+    color:#264796;
+
+    margin-bottom:12px;
+
+    line-height:1.4;
+}
+
+.lab-card p {
+
+    color:#555;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+.lab-code {
+
+    color:#e31e24;
+
+    font-weight:bold;
+
+    font-size:14px;
+}
+
+.lab-status {
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:5px 10px;
+
+    background:#eef5ff;
+
+    color:#264796;
+
+    font-size:12px;
+
+    font-weight:bold;
+}
+
+.lab-button {
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:10px 15px;
+
+    background:#264796;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:13px;
+}
+
+.lab-button:hover {
+
+    background:#1d397b;
+}
+
+.no-results {
+
+    background:white;
+
+    border:1px solid #ddd;
+
+    padding:25px;
+
+    color:#666;
+
+    grid-column:1/-1;
+}
+
+.loading {
+
+    background:white;
+
+    padding:25px;
+
+    color:#264796;
+
+    grid-column:1/-1;
+}
+
+@media(max-width:1000px) {
+
+    .lab-grid {
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:800px) {
+
+    .lab-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- GOVERNMENT BAR -->
+
+<div class="gov-bar">
+
+<div>
+Government of India
+</div>
+
+<div>
+BIS SmartAssist — SIH Prototype
+</div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="header-container">
+
+<div class="brand">
+
+<img
+src="../assets/bis-logo.png"
+class="logo"
+alt="BIS">
+
+<div class="brand-text">
+
+<h1>
+Bureau of Indian Standards
+</h1>
+
+<p>
+BIS SmartAssist
+<span>• SIH Prototype</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="../index.html">
+Home
+</a>
+
+<a href="standards.html">
+Standards
+</a>
+
+<a href="certification.html">
+Certification
+</a>
+
+<a href="laboratories.html"
+class="active">
+Laboratories
+</a>
+
+<a href="hallmarking.html">
+Hallmarking
+</a>
+
+<a href="consumer.html">
+Consumer
+</a>
+
+<a href="training.html">
+Training
+</a>
+
+<a href="assistant.html"
+class="ai-nav">
+🤖 SmartAssist
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- LABORATORY PAGE -->
+
+<section class="lab-page">
+
+<div class="section-container">
+
+
+<div class="section-heading">
+
+<span>
+LABORATORY SERVICES
+</span>
+
+<h2>
+Smart Laboratory Finder
+</h2>
+
+<p>
+Find relevant BIS laboratory information
+using a laboratory name, location or
+Indian Standard.
+</p>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="lab-search">
+
+<input
+id="labQuery"
+type="text"
+placeholder="Enter laboratory name, IS number, city or testing requirement..."
+onkeydown="handleEnter(event)">
+
+<button onclick="findLab()">
+Find Laboratory
+</button>
+
+</div>
+
+
+<!-- RESULT COUNT -->
+
+<div
+id="labInfo"
+class="lab-info">
+</div>
+
+
+<!-- RESULTS -->
+
+<div
+id="labResults"
+class="lab-grid">
+
+<div class="loading">
+Loading BIS laboratory information...
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<script>
+
+
+const API_URL =
+"http://127.0.0.1:8000/api/labs";
+
+
+function escapeHtml(value) {
+
+    if (value === null ||
+        value === undefined) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+}
+
+
+function displayLabs(labs) {
+
+    const container =
+        document.getElementById(
+            "labResults"
+        );
+
+    const info =
+        document.getElementById(
+            "labInfo"
+        );
+
+
+    container.innerHTML = "";
+
+
+    if (!labs ||
+        labs.length === 0) {
+
+        info.innerHTML =
+            "No BIS laboratories found for your search.";
+
+        container.innerHTML = `
+
+            <div class="no-results">
+
+                <strong>
+                No matching laboratory found.
+                </strong>
+
+                <p>
+                Try searching with a laboratory name,
+                city, state or IS number.
+                </p>
+
+                <a
+                href="https://lims.bis.gov.in/home/labs/"
+                target="_blank"
+                class="lab-button">
+
+                Search Official BIS LIMS →
+
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    info.innerHTML =
+        `Found ${labs.length} BIS laboratory/laboratories in the SmartAssist database.`;
+
+
+    labs.forEach(lab => {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "lab-card";
+
+
+        card.innerHTML = `
+
+            <div class="lab-code">
+
+                Lab Code:
+                ${escapeHtml(lab.lab_code)}
+
+            </div>
+
+            <h3>
+
+                ${escapeHtml(lab.name)}
+
+            </h3>
+
+            <p>
+
+                <strong>
+                Location:
+                </strong>
+
+                ${escapeHtml(lab.location)}
+
+            </p>
+
+            <p>
+
+                <strong>
+                Testing Scope:
+                </strong>
+
+                ${escapeHtml(lab.testing_scope)}
+
+            </p>
+
+            <span class="lab-status">
+
+                BIS Recognized Laboratory
+
+            </span>
+
+            <br>
+
+            <a
+            href="${escapeHtml(lab.official_url)}"
+            target="_blank"
+            class="lab-button">
+
+            View Official BIS LIMS →
+
+            </a>
+
+        `;
+
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+async function findLab() {
+
+    const input =
+        document.getElementById(
+            "labQuery"
+        );
+
+
+    const query =
+        input.value.trim();
+
+
+    const container =
+        document.getElementById(
+            "labResults"
+        );
+
+
+    const info =
+        document.getElementById(
+            "labInfo"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="loading">
+
+            Searching BIS laboratory database...
+
+        </div>
+
+    `;
+
+
+    info.innerHTML = "";
+
+
+    try {
+
+        const response =
+            await fetch(
+
+                API_URL +
+                "?q=" +
+                encodeURIComponent(query)
+
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Laboratory API error"
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        displayLabs(
+            data.labs
+        );
+
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+
+        info.innerHTML =
+            "Unable to connect to the BIS SmartAssist laboratory database.";
+
+
+        container.innerHTML = `
+
+            <div class="no-results">
+
+                <strong>
+                Laboratory database unavailable.
+                </strong>
+
+                <p>
+                Please make sure the FastAPI backend
+                is running on port 8000.
+                </p>
+
+                <a
+                href="https://lims.bis.gov.in/home/labs/"
+                target="_blank"
+                class="lab-button">
+
+                Open Official BIS LIMS →
+
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        findLab();
+
+    }
+
+}
+
+
+/* Load laboratories when page opens */
+
+findLab();
+
+
+</script>
+
+
+</body>
+
+</html>

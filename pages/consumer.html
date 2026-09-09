@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Consumer Engagement | BIS SmartAssist</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<style>
+
+/* =====================================================
+   CONSUMER PAGE
+===================================================== */
+
+.consumer-page {
+
+padding: 60px 0;
+
+background: #f7f8fb;
+
+}
+
+
+/* =====================================================
+   SERVICE GRID
+===================================================== */
+
+.consumer-grid {
+
+display: grid;
+
+grid-template-columns:
+repeat(3, 1fr);
+
+gap: 22px;
+
+}
+
+
+/* =====================================================
+   CONSUMER CARD
+===================================================== */
+
+.consumer-card {
+
+background: white;
+
+padding: 28px;
+
+border-top: 4px solid #264796;
+
+box-shadow:
+0 4px 15px rgba(0,0,0,.06);
+
+border-radius: 6px;
+
+}
+
+
+.consumer-card h3 {
+
+color: #264796;
+
+margin-bottom: 10px;
+
+}
+
+
+.consumer-card p {
+
+color: #666;
+
+font-size: 14px;
+
+line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   GUIDANCE SECTION
+===================================================== */
+
+.guidance-section {
+
+margin-top: 45px;
+
+}
+
+
+.guidance-section h3 {
+
+color: #264796;
+
+margin-bottom: 18px;
+
+}
+
+
+.guidance-list {
+
+display: grid;
+
+grid-template-columns:
+repeat(2, 1fr);
+
+gap: 15px;
+
+}
+
+
+.guidance-item {
+
+background: white;
+
+border-left: 4px solid #264796;
+
+padding: 18px;
+
+box-shadow:
+0 3px 12px rgba(0,0,0,.05);
+
+}
+
+
+/* =====================================================
+   OFFICIAL RESOURCES
+===================================================== */
+
+.resources-section {
+
+margin-top: 45px;
+
+}
+
+
+.resources-section h3 {
+
+color: #264796;
+
+margin-bottom: 18px;
+
+}
+
+
+.resource-links {
+
+display: flex;
+
+flex-wrap: wrap;
+
+gap: 12px;
+
+}
+
+
+.resource-link {
+
+display: inline-block;
+
+padding: 12px 18px;
+
+background: #264796;
+
+color: white;
+
+text-decoration: none;
+
+border-radius: 4px;
+
+font-weight: 600;
+
+}
+
+
+.resource-link:hover {
+
+background: #102f72;
+
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading {
+
+text-align: center;
+
+padding: 40px;
+
+color: #264796;
+
+font-weight: 600;
+
+}
+
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error {
+
+background: #fff1f1;
+
+border-left: 5px solid #d93025;
+
+padding: 20px;
+
+color: #8a1c1c;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px) {
+
+.consumer-grid {
+
+grid-template-columns: 1fr;
+
+}
+
+.guidance-list {
+
+grid-template-columns: 1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GOVERNMENT BAR
+===================================================== -->
+
+<div class="gov-bar">
+
+<div>
+Government of India
+</div>
+
+<div>
+BIS SmartAssist — SIH Prototype
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="header-container">
+
+<div class="brand">
+
+<img
+src="../assets/bis-logo.png"
+class="logo"
+alt="BIS">
+
+<div class="brand-text">
+
+<h1>
+Bureau of Indian Standards
+</h1>
+
+<p>
+BIS SmartAssist
+<span>• SIH Prototype</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="../index.html">
+Home
+</a>
+
+<a href="standards.html">
+Standards
+</a>
+
+<a href="certification.html">
+Certification
+</a>
+
+<a href="laboratories.html">
+Laboratories
+</a>
+
+<a href="hallmarking.html">
+Hallmarking
+</a>
+
+<a href="consumer.html">
+Consumer
+</a>
+
+<a href="training.html">
+Training
+</a>
+
+<a href="assistant.html"
+class="ai-nav">
+
+🤖 SmartAssist
+
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- =====================================================
+     CONSUMER PAGE
+===================================================== -->
+
+<section class="consumer-page">
+
+<div class="section-container">
+
+
+<!-- =====================================================
+     PAGE HEADING
+===================================================== -->
+
+<div class="section-heading">
+
+<span>
+CONSUMER ENGAGEMENT
+</span>
+
+<h2>
+Be a Smart Consumer
+</h2>
+
+<p>
+SmartAssist helps users navigate BIS
+consumer information and services.
+</p>
+
+</div>
+
+
+<!-- =====================================================
+     DYNAMIC CONTENT
+===================================================== -->
+
+<div id="consumerContent">
+
+<div class="loading">
+
+Loading BIS Consumer information...
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+const API_URL =
+"http://127.0.0.1:8000/api/consumer";
+
+
+/* =====================================================
+   LOAD CONSUMER DATA
+===================================================== */
+
+async function loadConsumer() {
+
+
+const container =
+document.getElementById(
+"consumerContent"
+);
+
+
+try {
+
+
+/* -----------------------------------------------------
+   CALL BACKEND API
+----------------------------------------------------- */
+
+const response =
+await fetch(API_URL);
+
+
+if (!response.ok) {
+
+throw new Error(
+"Unable to connect to BIS SmartAssist API."
+);
+
+}
+
+
+/* -----------------------------------------------------
+   CONVERT RESPONSE TO JSON
+----------------------------------------------------- */
+
+const data =
+await response.json();
+
+
+const consumer =
+data.consumer;
+
+
+/* =====================================================
+   CONSUMER SERVICE CARDS
+===================================================== */
+
+let html = `
+
+<div class="consumer-grid">
+
+${consumer.services.map(service => `
+
+<div class="consumer-card">
+
+<h3>
+${service.title}
+</h3>
+
+<p>
+${service.description}
+</p>
+
+<br>
+
+<a
+href="${service.url}"
+target="_blank"
+class="official-link">
+
+Open Official BIS Resource →
+
+</a>
+
+</div>
+
+`).join("")}
+
+<!-- SMARTASSIST CARD -->
+
+<div class="consumer-card">
+
+<h3>
+🤖 SmartAssist
+</h3>
+
+<p>
+Ask questions in natural language instead
+of searching multiple BIS pages manually.
+</p>
+
+<br>
+
+<a
+href="assistant.html"
+class="official-link">
+
+Ask SmartAssist →
+
+</a>
+
+</div>
+
+
+<!-- OFFICIAL INFORMATION CARD -->
+
+<div class="consumer-card">
+
+<h3>
+🌐 Official Information
+</h3>
+
+<p>
+Use official BIS resources for authoritative
+information and consumer-related actions.
+</p>
+
+<br>
+
+<a
+href="${consumer.official_links.consumer_overview}"
+target="_blank"
+class="official-link">
+
+BIS Consumer Overview →
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   CONSUMER GUIDANCE
+===================================================== */
+
+html += `
+
+<div class="guidance-section">
+
+<h3>
+🛡️ Smart Consumer Guidance
+</h3>
+
+<div class="guidance-list">
+
+${consumer.consumer_guidance.map(
+(item, index) => `
+
+<div class="guidance-item">
+
+<strong>
+${index + 1}.
+</strong>
+
+<span>
+${item}
+</span>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   OFFICIAL BIS RESOURCES
+===================================================== */
+
+html += `
+
+<div class="resources-section">
+
+<h3>
+🔗 Official BIS Consumer Resources
+</h3>
+
+<div class="resource-links">
+
+
+<a
+href="${consumer.official_links.complaint_registration}"
+target="_blank"
+class="resource-link">
+
+📝 Register a Complaint →
+
+</a>
+
+
+<a
+href="${consumer.official_links.know_your_standard}"
+target="_blank"
+class="resource-link">
+
+📚 Know Your Standard →
+
+</a>
+
+
+<a
+href="${consumer.official_links.bis_care}"
+target="_blank"
+class="resource-link">
+
+📱 BIS CARE App →
+
+</a>
+
+
+<a
+href="${consumer.official_links.consumer_overview}"
+target="_blank"
+class="resource-link">
+
+🛡 Consumer Overview →
+
+</a>
+
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   DISPLAY CONTENT
+===================================================== */
+
+container.innerHTML = html;
+
+
+}
+
+
+/* =====================================================
+   ERROR HANDLING
+===================================================== */
+
+catch (error) {
+
+
+container.innerHTML = `
+
+<div class="error">
+
+<h3>
+Unable to load Consumer information
+</h3>
+
+<p>
+${error.message}
+</p>
+
+<p>
+Please make sure the BIS SmartAssist
+backend server is running.
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+loadConsumer();
+
+
+</script>
+
+
+</body>
+
+</html>

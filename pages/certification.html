@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Product Certification | BIS SmartAssist</title>
+
+<link rel="stylesheet"
+      href="../css/style.css">
+
+<style>
+
+/* =========================================================
+   CERTIFICATION PAGE
+   ========================================================= */
+
+.page-banner {
+
+    background:
+        linear-gradient(
+            120deg,
+            #102f72,
+            #264796
+        );
+
+    color:white;
+
+    padding:60px 0;
+}
+
+.page-banner h1 {
+
+    font-size:42px;
+
+    margin-bottom:10px;
+}
+
+.page-banner p {
+
+    max-width:750px;
+
+    font-size:17px;
+
+    color:#e5ebfa;
+}
+
+
+/* =========================================================
+   NAVIGATOR
+   ========================================================= */
+
+.navigator-box {
+
+    background:white;
+
+    margin-top:-35px;
+
+    position:relative;
+
+    padding:30px;
+
+    border-radius:6px;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.12);
+}
+
+.navigator-form {
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 150px;
+
+    gap:12px;
+}
+
+.navigator-form input {
+
+    height:52px;
+
+    border:1px solid #ccd3df;
+
+    padding:0 16px;
+
+    font-size:15px;
+
+    outline:none;
+}
+
+.navigator-form input:focus {
+
+    border-color:#264796;
+}
+
+.navigator-form button {
+
+    border:none;
+
+    background:#e31e24;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    border-radius:3px;
+}
+
+.navigator-hint {
+
+    margin-top:12px;
+
+    color:#777;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.page-content {
+
+    padding:65px 0;
+
+    background:#f6f8fc;
+}
+
+
+/* =========================================================
+   PROCESS
+   ========================================================= */
+
+.process {
+    display:grid;
+    grid-template-columns:repeat(5, minmax(0, 1fr));
+    gap:12px;
+    margin-top:40px;
+    width:100%;
+}
+
+.process-step {
+    background:#eef4ff;
+    padding:22px 12px;
+    text-align:center;
+    border-top:4px solid #264796;
+    min-width:0;
+    border-radius:6px;
+    line-height:1.4;
+}
+
+.process-step strong {
+    display:block;
+    color:#e31e24;
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+/* =========================================================
+   RESULTS
+   ========================================================= */
+
+.results-area {
+
+    margin-top:45px;
+}
+
+.results-title {
+
+    color:#555;
+
+    font-size:14px;
+
+    margin-bottom:20px;
+}
+
+.standard-results {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:22px;
+}
+
+.standard-card {
+
+    background:white;
+
+    border:1px solid #e0e3e9;
+
+    padding:25px;
+
+    transition:.2s;
+}
+
+.standard-card:hover {
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.09);
+
+    transform:translateY(-3px);
+}
+
+.standard-number {
+
+    display:inline-block;
+
+    background:#eef3ff;
+
+    color:#264796;
+
+    padding:5px 10px;
+
+    font-weight:bold;
+
+    font-size:13px;
+
+    margin-bottom:12px;
+}
+
+.standard-card h3 {
+
+    color:#264796;
+
+    margin-bottom:10px;
+
+    font-size:20px;
+}
+
+.standard-card p {
+
+    color:#666;
+
+    font-size:14px;
+
+    margin-bottom:15px;
+}
+
+.standard-meta {
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:10px;
+
+    margin-bottom:18px;
+}
+
+.meta-item {
+
+    background:#f7f8fa;
+
+    padding:10px;
+
+    font-size:12px;
+
+    color:#555;
+}
+
+.meta-item strong {
+
+    display:block;
+
+    color:#264796;
+
+    margin-bottom:3px;
+}
+
+.standard-actions {
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.standard-actions a {
+
+    border:1px solid #264796;
+
+    color:#264796;
+
+    padding:8px 12px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    text-decoration:none;
+}
+
+.standard-actions a.primary {
+
+    background:#264796;
+
+    color:white;
+}
+
+
+/* =========================================================
+   GUIDANCE CARDS
+   ========================================================= */
+
+.info-grid {
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:22px;
+
+    margin-top:45px;
+}
+
+.info-card {
+
+    background:white;
+
+    border:1px solid #ddd;
+
+    padding:25px;
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.06);
+}
+
+.info-card h3 {
+
+    color:#264796;
+
+    margin-bottom:10px;
+}
+
+.info-card p {
+
+    color:#666;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   NOTICE
+   ========================================================= */
+
+.notice {
+
+    background:#fff4d6;
+
+    padding:20px;
+
+    margin-top:35px;
+
+    border-left:5px solid #e31e24;
+
+    color:#555;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-card {
+
+    background:white;
+
+    padding:30px;
+
+    text-align:center;
+
+    border:1px solid #ddd;
+
+    color:#666;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1000px) {
+
+    .process {
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+    .info-grid {
+        grid-template-columns:repeat(2, 1fr);
+    }
+}
+
+@media(max-width:600px) {
+
+    .process {
+        grid-template-columns:1fr;
+    }
+
+    .info-grid {
+        grid-template-columns:1fr;
+    }
+
+    .page-banner h1 {
+        font-size:32px;
+    }
+}
+
+    .standard-results {
+
+        grid-template-columns:1fr;
+
+    }
+
+    .info-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+    .process {
+
+        grid-template-columns:1fr;
+
+    }
+
+    .page-banner h1 {
+
+        font-size:32px;
+
+    }
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     GOVERNMENT BAR
+     ====================================================== -->
+
+<div class="gov-bar">
+
+    <div>
+        Government of India
+    </div>
+
+    <div>
+        BIS SmartAssist — SIH Prototype
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     HEADER
+     ====================================================== -->
+
+<header class="header">
+
+<div class="header-container">
+
+<div class="brand">
+
+<img
+src="../assets/bis-logo.png"
+class="logo"
+alt="BIS SmartAssist">
+
+<div class="brand-text">
+
+<h1>
+Bureau of Indian Standards
+</h1>
+
+<p>
+BIS SmartAssist
+<span>• SIH Prototype</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ======================================================
+     NAVIGATION
+     ====================================================== -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="../index.html">
+Home
+</a>
+
+<a href="standards.html">
+Standards
+</a>
+
+<a href="certification.html">
+Certification
+</a>
+
+<a href="laboratories.html">
+Laboratories
+</a>
+
+<a href="hallmarking.html">
+Hallmarking
+</a>
+
+<a href="consumer.html">
+Consumer
+</a>
+
+<a href="training.html">
+Training
+</a>
+
+<a href="assistant.html"
+class="ai-nav">
+🤖 SmartAssist
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- ======================================================
+     BANNER
+     ====================================================== -->
+
+<section class="page-banner">
+
+<div class="section-container">
+
+<span class="section-label"
+style="color:white">
+
+CONFORMITY ASSESSMENT
+
+</span>
+
+<h1>
+Product Certification Navigator
+</h1>
+
+<p>
+Describe your product or search for a relevant
+Indian Standard. SmartAssist will help you
+understand the next certification steps.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     SEARCH
+     ====================================================== -->
+
+<section>
+
+<div class="section-container">
+
+<div class="navigator-box">
+
+<form
+class="navigator-form"
+onsubmit="findCertification(event)">
+
+<input
+id="productSearch"
+type="text"
+placeholder="Example: drinking water, electrical appliance, concrete..."
+autocomplete="off">
+
+<button type="submit">
+Find Guidance
+</button>
+
+</form>
+
+
+<p class="navigator-hint">
+
+Try:
+
+<strong>water</strong>,
+<strong>concrete</strong>,
+<strong>electrical</strong>,
+or an IS number.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     MAIN CONTENT
+     ====================================================== -->
+
+<section class="page-content">
+
+<div class="section-container">
+
+
+<!-- ======================================================
+     PROCESS
+     ====================================================== -->
+
+<div class="section-heading">
+
+<span>
+CERTIFICATION NAVIGATOR
+</span>
+
+<h2>
+How BIS SmartAssist guides you
+</h2>
+
+<p>
+The navigator helps users move from a product
+description toward the appropriate BIS information
+and official service.
+</p>
+
+</div>
+
+
+<div class="process">
+
+
+<div class="process-step">
+
+<strong>01</strong>
+
+Identify Standard
+
+</div>
+
+
+<div class="process-step">
+
+<strong>02</strong>
+
+Understand Requirements
+
+</div>
+
+
+<div class="process-step">
+
+<strong>03</strong>
+
+Prepare Manufacturing & Testing
+
+</div>
+
+
+<div class="process-step">
+
+<strong>04</strong>
+
+Assessment & Testing
+
+</div>
+
+
+<div class="process-step">
+
+<strong>05</strong>
+
+Certification
+
+</div>
+
+
+</div>
+
+
+<!-- ======================================================
+     SEARCH RESULTS
+     ====================================================== -->
+
+<div class="results-area">
+
+<div
+id="resultCount"
+class="results-title">
+
+Enter a product above to find relevant
+BIS standards.
+
+</div>
+
+
+<div
+id="certificationResults"
+class="standard-results">
+
+<!-- Dynamic results appear here -->
+
+</div>
+
+</div>
+
+
+<!-- ======================================================
+     GUIDANCE CARDS
+     ====================================================== -->
+
+<div class="info-grid">
+
+
+<div class="info-card">
+
+<h3>
+1. Identify the Indian Standard
+</h3>
+
+<p>
+Certification starts by identifying the
+Indian Standard applicable to the product.
+Use Smart Standard Finder or search above.
+</p>
+
+<br>
+
+<a
+href="standards.html"
+class="hero-button">
+
+Find Standard
+
+</a>
+
+</div>
+
+
+<div class="info-card">
+
+<h3>
+2. Prepare for Assessment
+</h3>
+
+<p>
+Manufacturers may need appropriate
+manufacturing infrastructure, process
+controls, quality-control and testing
+capabilities according to the applicable
+requirements.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<h3>
+3. Apply Through Official BIS Service
+</h3>
+
+<p>
+Actual certification applications and
+payments should be completed through
+the current official BIS online process.
+</p>
+
+<br>
+
+<a
+href="https://www.bis.gov.in/apply-for-a-license/?lang=en"
+target="_blank"
+rel="noopener noreferrer"
+class="hero-button">
+
+Apply Guidance
+
+</a>
+
+</div>
+
+
+</div>
+
+
+<!-- ======================================================
+     IMPORTANT NOTICE
+     ====================================================== -->
+
+<div class="notice">
+
+<strong>
+Important:
+</strong>
+
+Certification requirements depend on the
+specific product, applicable Indian Standard
+and conformity-assessment scheme. This
+prototype provides guidance from the
+available BIS information and does not
+replace an official BIS decision.
+
+Always verify the current requirement using
+official BIS sources before applying.
+
+</div>
+
+
+<br><br>
+
+
+<!-- ======================================================
+     OFFICIAL LINKS
+     ====================================================== -->
+
+<div class="section-heading">
+
+<span>
+OFFICIAL BIS RESOURCES
+</span>
+
+<h2>
+Continue with BIS
+</h2>
+
+</div>
+
+
+<div class="standard-actions">
+
+
+<a
+href="https://www.bis.gov.in/product-certification/product-certification-overview/?lang=en"
+target="_blank"
+rel="noopener noreferrer"
+class="primary">
+
+Certification Overview
+
+</a>
+
+
+<a
+href="https://www.bis.gov.in/product-certification/product-certification-process/?lang=en"
+target="_blank"
+rel="noopener noreferrer">
+
+Certification Process
+
+</a>
+
+
+<a
+href="https://www.bis.gov.in/product-certification/products-under-compulsory-certification/?lang=en"
+target="_blank"
+rel="noopener noreferrer">
+
+Compulsory Certification
+
+</a>
+
+
+<a
+href="https://www.bis.gov.in/product-certification/product-certification-faq/?lang=en"
+target="_blank"
+rel="noopener noreferrer">
+
+Certification FAQ
+
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+     ====================================================== -->
+
+<script>
+
+
+/* =========================================================
+   BACKEND API
+   ========================================================= */
+
+const API_URL =
+    "http://127.0.0.1:8000/api/standards";
+
+
+/* =========================================================
+   HTML SAFETY
+   ========================================================= */
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   SEARCH CERTIFICATION
+   ========================================================= */
+
+async function findCertification(event) {
+
+    event.preventDefault();
+
+
+    const searchInput =
+        document.getElementById(
+            "productSearch"
+        );
+
+
+    const resultContainer =
+        document.getElementById(
+            "certificationResults"
+        );
+
+
+    const resultCount =
+        document.getElementById(
+            "resultCount"
+        );
+
+
+    const query =
+        searchInput.value.trim();
+
+
+    /* -----------------------------------------------------
+       EMPTY SEARCH
+       ----------------------------------------------------- */
+
+    if (!query) {
+
+        resultCount.innerHTML =
+            "Please enter a product or IS number.";
+
+        resultContainer.innerHTML = `
+
+            <div class="loading-card">
+
+                <h3>
+                    Start with your product
+                </h3>
+
+                <p>
+                    Example: water, concrete,
+                    electrical or IS 10500.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------------------
+       LOADING
+       ----------------------------------------------------- */
+
+    resultCount.innerHTML =
+        "Searching BIS standards...";
+
+
+    resultContainer.innerHTML = `
+
+        <div class="loading-card">
+
+            <h3>
+                🔎 Finding relevant standards...
+            </h3>
+
+            <p>
+                SmartAssist is checking the BIS
+                database.
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+
+        /* -------------------------------------------------
+           CALL FASTAPI
+           ------------------------------------------------- */
+
+        const response =
+            await fetch(
+
+                API_URL +
+                "?q=" +
+                encodeURIComponent(query)
+
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "API error: " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        const standards =
+            data.standards || [];
+
+
+        /* -------------------------------------------------
+           NO RESULTS
+           ------------------------------------------------- */
+
+        if (standards.length === 0) {
+
+            resultCount.innerHTML =
+                "No matching BIS standard found.";
+
+
+            resultContainer.innerHTML = `
+
+                <div class="standard-card">
+
+                    <h3>
+                        No matching standard found
+                    </h3>
+
+                    <p>
+                        SmartAssist could not find
+                        a matching record in the
+                        current BIS database.
+                    </p>
+
+                    <p>
+                        Try another product name,
+                        keyword or IS number.
+                    </p>
+
+                    <br>
+
+                    <a
+                        href="assistant.html"
+                        class="hero-button">
+
+                        Ask SmartAssist
+
+                    </a>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /* -------------------------------------------------
+           RESULTS FOUND
+           ------------------------------------------------- */
+
+        resultCount.innerHTML =
+            `Found ${standards.length} relevant BIS standard(s)`;
+
+
+        resultContainer.innerHTML = "";
+
+
+        standards.forEach(
+            function(standard) {
+
+
+                const number =
+                    escapeHtml(
+                        standard.is_number
+                    );
+
+
+                const title =
+                    escapeHtml(
+                        standard.title
+                    );
+
+
+                const category =
+                    escapeHtml(
+                        standard.category
+                    );
+
+
+                const description =
+                    escapeHtml(
+                        standard.description
+                    );
+
+
+                const status =
+                    escapeHtml(
+                        standard.status
+                    );
+
+
+                const year =
+                    escapeHtml(
+                        standard.year
+                    );
+
+
+                const officialUrl =
+                    escapeHtml(
+                        standard.official_url
+                    );
+
+
+                resultContainer.innerHTML += `
+
+                    <article
+                        class="standard-card">
+
+
+                        <span
+                            class="standard-number">
+
+                            ${number}
+
+                        </span>
+
+
+                        <h3>
+
+                            ${title}
+
+                        </h3>
+
+
+                        <p>
+
+                            ${description}
+
+                        </p>
+
+
+                        <div
+                            class="standard-meta">
+
+
+                            <div
+                                class="meta-item">
+
+                                <strong>
+                                    Category
+                                </strong>
+
+                                ${category}
+
+                            </div>
+
+
+                            <div
+                                class="meta-item">
+
+                                <strong>
+                                    Status
+                                </strong>
+
+                                ${status}
+
+                            </div>
+
+
+                            <div
+                                class="meta-item">
+
+                                <strong>
+                                    Year
+                                </strong>
+
+                                ${year}
+
+                            </div>
+
+
+                            <div
+                                class="meta-item">
+
+                                <strong>
+                                    Database
+                                </strong>
+
+                                BIS SmartAssist
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div
+                            class="standard-actions">
+
+
+                            <a
+                                href="${officialUrl}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="primary">
+
+                                Official BIS
+
+                            </a>
+
+
+                            <a
+                                href="standards.html">
+
+                                View Standard
+
+                            </a>
+
+
+                            <a
+                                href="assistant.html">
+
+                                Ask AI
+
+                            </a>
+
+
+                        </div>
+
+
+                    </article>
+
+                `;
+
+            }
+        );
+
+
+        /* -------------------------------------------------
+           ADD GUIDANCE AFTER RESULTS
+           ------------------------------------------------- */
+
+        resultContainer.innerHTML += `
+
+            <div
+                class="standard-card">
+
+                <h3>
+                    Next Certification Steps
+                </h3>
+
+                <p>
+                    After identifying the relevant
+                    Indian Standard, review the
+                    applicable manufacturing,
+                    process-control, quality-control
+                    and testing requirements.
+                </p>
+
+                <div
+                    class="standard-actions">
+
+                    <a
+                        href="https://www.bis.gov.in/apply-for-a-license/?lang=en"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="primary">
+
+                        BIS Application Guidance
+
+                    </a>
+
+
+                    <a
+                        href="https://www.bis.gov.in/product-certification/product-certification-process/?lang=en"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        View Process
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            "Certification API Error:",
+            error
+        );
+
+
+        resultCount.innerHTML =
+            "Unable to connect to BIS SmartAssist API.";
+
+
+        resultContainer.innerHTML = `
+
+            <div class="standard-card">
+
+                <h3>
+                    ⚠️ Backend Connection Error
+                </h3>
+
+                <p>
+                    SmartAssist could not connect
+                    to the backend.
+                </p>
+
+                <p>
+                    Please make sure FastAPI is
+                    running at:
+                </p>
+
+                <strong>
+                    http://127.0.0.1:8000
+                </strong>
+
+                <br><br>
+
+                <button
+                    onclick="findCertificationRetry()"
+                    style="
+                        background:#264796;
+                        color:white;
+                        border:none;
+                        padding:10px 18px;
+                        cursor:pointer;
+                        border-radius:3px;
+                    ">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   RETRY
+   ========================================================= */
+
+function findCertificationRetry() {
+
+    const fakeEvent = {
+
+        preventDefault:
+            function() {}
+
+    };
+
+
+    findCertification(fakeEvent);
+
+}
+
+</script>
+
+
+</body>
+
+</html>

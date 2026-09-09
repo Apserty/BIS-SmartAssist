@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BIS SmartAssist</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        .assistant-page {
+
+            padding: 50px 0;
+
+            background: #f5f7fb;
+
+            min-height: 700px;
+
+        }
+
+        .assistant-layout {
+
+            display: grid;
+
+            grid-template-columns: 280px 1fr;
+
+            gap: 25px;
+
+        }
+
+        .assistant-sidebar {
+
+            background: white;
+
+            border: 1px solid #ddd;
+
+            padding: 20px;
+
+        }
+
+        .assistant-sidebar h3 {
+
+            color: #264796;
+
+            margin-bottom: 20px;
+
+        }
+
+        .quick-option {
+
+            display: block;
+
+            width: 100%;
+
+            text-align: left;
+
+            padding: 12px;
+
+            margin-bottom: 10px;
+
+            background: #f1f5ff;
+
+            border: 1px solid #d9e2f5;
+
+            color: #264796;
+
+            cursor: pointer;
+
+            border-radius: 4px;
+
+        }
+
+        .quick-option:hover {
+
+            background: #e5edff;
+
+        }
+
+        .chat-container {
+
+            background: white;
+
+            border: 1px solid #ddd;
+
+            display: flex;
+
+            flex-direction: column;
+
+            min-height: 600px;
+
+        }
+
+        .chat-header {
+
+            background: #264796;
+
+            color: white;
+
+            padding: 20px;
+
+        }
+
+        .chat-header h2 {
+
+            margin-bottom: 4px;
+
+        }
+
+        .chat-body {
+
+            flex: 1;
+
+            padding: 25px;
+
+            overflow-y: auto;
+
+        }
+
+        .message {
+
+            max-width: 75%;
+
+            padding: 13px 16px;
+
+            margin-bottom: 15px;
+
+            border-radius: 8px;
+
+            line-height: 1.6;
+
+        }
+
+        .bot-message {
+
+            background: #eef4ff;
+
+            color: #222;
+
+        }
+
+        .user-message {
+
+            background: #264796;
+
+            color: white;
+
+            margin-left: auto;
+
+        }
+
+        .chat-input {
+
+            display: flex;
+
+            border-top: 1px solid #ddd;
+
+        }
+
+        .chat-input input {
+
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            padding: 17px;
+
+        }
+
+        .chat-input button {
+
+            border: none;
+
+            background: #e31e24;
+
+            color: white;
+
+            padding: 0 25px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+        .chat-input button:hover {
+
+            background: #c91b20;
+
+        }
+
+        .source-box {
+
+            margin-top: 12px;
+
+            padding: 10px;
+
+            border-left: 3px solid #264796;
+
+            background: white;
+
+            font-size: 12px;
+
+        }
+
+        .source-box a {
+
+            color: #264796;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+        }
+
+        .source-box a:hover {
+
+            text-decoration: underline;
+
+        }
+
+        .standard-result {
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            background: white;
+
+            border: 1px solid #d9e2f5;
+
+            border-radius: 6px;
+
+        }
+
+        .standard-result-number {
+
+            color: #e31e24;
+
+            font-weight: bold;
+
+            font-size: 14px;
+
+        }
+
+        .standard-result h4 {
+
+            color: #264796;
+
+            margin: 6px 0;
+
+        }
+
+        .standard-result p {
+
+            margin-bottom: 8px;
+
+        }
+
+        .standard-result a {
+
+            color: #264796;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+        }
+
+        .typing {
+
+            color: #666;
+
+            font-style: italic;
+
+        }
+
+        @media(max-width:800px) {
+
+            .assistant-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .message {
+
+                max-width: 90%;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- GOVERNMENT BAR -->
+
+<div class="gov-bar">
+
+    <div>
+        Government of India
+    </div>
+
+    <div>
+        BIS SmartAssist — SIH Prototype
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <div class="brand">
+
+            <img
+                src="../assets/bis-logo.png"
+                class="logo"
+                alt="BIS SmartAssist"
+            >
+
+            <div class="brand-text">
+
+                <h1>
+                    Bureau of Indian Standards
+                </h1>
+
+                <p>
+                    BIS SmartAssist
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- NAV -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="standards.html">
+            Standards
+        </a>
+
+        <a href="certification.html">
+            Certification
+        </a>
+
+        <a href="laboratories.html">
+            Laboratories
+        </a>
+
+        <a href="hallmarking.html">
+            Hallmarking
+        </a>
+
+        <a href="consumer.html">
+            Consumer
+        </a>
+
+        <a href="training.html">
+            Training
+        </a>
+
+        <a href="assistant.html" class="ai-nav">
+            🤖 SmartAssist
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ASSISTANT -->
+
+<section class="assistant-page">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span>
+                AI-POWERED ASSISTANCE
+            </span>
+
+            <h2>
+                BIS SmartAssist
+            </h2>
+
+            <p>
+                Ask questions about Indian Standards,
+                certification, laboratories and BIS services.
+            </p>
+
+        </div>
+
+
+        <div class="assistant-layout">
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="assistant-sidebar">
+
+                <h3>
+                    Quick Services
+                </h3>
+
+                <button
+                    class="quick-option"
+                    onclick="askQuestion('Find an Indian Standard')"
+                >
+                    🔎 Find a Standard
+                </button>
+
+                <button
+                    class="quick-option"
+                    onclick="askQuestion('How can I get BIS certification?')"
+                >
+                    📜 Certification
+                </button>
+
+                <button
+                    class="quick-option"
+                    onclick="askQuestion('Find a BIS recognised laboratory')"
+                >
+                    🧪 Laboratories
+                </button>
+
+                <button
+                    class="quick-option"
+                    onclick="askQuestion('Explain BIS hallmarking')"
+                >
+                    💎 Hallmarking
+                </button>
+
+                <button
+                    class="quick-option"
+                    onclick="askQuestion('How can I file a BIS complaint?')"
+                >
+                    🛡 Consumer Support
+                </button>
+
+            </aside>
+
+
+            <!-- CHAT -->
+
+            <div class="chat-container">
+
+                <div class="chat-header">
+
+                    <h2>
+                        🤖 SmartAssist
+                    </h2>
+
+                    <p>
+                        Ask in natural language
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="chat-body"
+                    id="chatBody"
+                >
+
+                    <div class="message bot-message">
+
+                        Hello! 👋
+
+                        <br><br>
+
+                        I am BIS SmartAssist.
+
+                        <br><br>
+
+                        You can ask me about:
+
+                        <ul>
+
+                            <li>Indian Standards</li>
+
+                            <li>Certification</li>
+
+                            <li>Laboratories</li>
+
+                            <li>Hallmarking</li>
+
+                            <li>Consumer services</li>
+
+                        </ul>
+
+                        <div class="source-box">
+
+                            🔗 Connected to the BIS SmartAssist
+                            knowledge database.
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chat-input">
+
+                    <input
+                        id="questionInput"
+                        type="text"
+                        placeholder="Ask your BIS question..."
+                        onkeydown="handleEnter(event)"
+                    >
+
+                    <button onclick="sendQuestion()">
+                        Send
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+
+/* =========================================================
+   BIS SMARTASSIST
+   Dynamic connection to FastAPI backend
+   ========================================================= */
+
+
+const API_URL =
+    "http://127.0.0.1:8000/api/standards";
+
+
+/* =========================================================
+   OFFICIAL BIS LINKS
+   ========================================================= */
+
+
+const BIS_LINKS = {
+
+    standards:
+        "https://www.bis.gov.in/know-your-standard/?lang=en",
+
+    certification:
+        "https://www.bis.gov.in/product-certification/product-certification-process/?lang=en",
+
+    apply:
+        "https://www.bis.gov.in/apply-for-a-license/?lang=en",
+
+    laboratories:
+        "https://lims.bis.gov.in/home/labs/",
+
+    hallmarking:
+        "https://www.bis.gov.in/hallmarking-overview/hallmarking-faq/?lang=en",
+
+    complaints:
+        "https://www.bis.gov.in/consumer-overview/online-complaint-registration/?lang=en"
+
+};
+
+
+/* =========================================================
+   SECURITY
+   ========================================================= */
+
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================================
+   ASK QUESTION
+   ========================================================= */
+
+
+function askQuestion(question) {
+
+    document.getElementById(
+        "questionInput"
+    ).value = question;
+
+    sendQuestion();
+
+}
+
+
+/* =========================================================
+   ENTER KEY
+   ========================================================= */
+
+
+function handleEnter(event) {
+
+    if (event.key === "Enter") {
+
+        sendQuestion();
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD MESSAGE
+   ========================================================= */
+
+
+function addMessage(
+    message,
+    type
+) {
+
+    const chat =
+        document.getElementById(
+            "chatBody"
+        );
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message " + type;
+
+    div.innerHTML =
+        message;
+
+    chat.appendChild(div);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =========================================================
+   SHOW TYPING
+   ========================================================= */
+
+
+function showTyping() {
+
+    const chat =
+        document.getElementById(
+            "chatBody"
+        );
+
+    const div =
+        document.createElement("div");
+
+    div.id = "typingMessage";
+
+    div.className =
+        "message bot-message typing";
+
+    div.innerHTML =
+        "🔎 Searching BIS information...";
+
+    chat.appendChild(div);
+
+    chat.scrollTop =
+        chat.scrollHeight;
+
+}
+
+
+/* =========================================================
+   REMOVE TYPING
+   ========================================================= */
+
+
+function removeTyping() {
+
+    const typing =
+        document.getElementById(
+            "typingMessage"
+        );
+
+    if (typing) {
+
+        typing.remove();
+
+    }
+
+}
+
+
+/* =========================================================
+   DETECT SEARCH TERMS
+   ========================================================= */
+
+
+function detectSearchTerm(question) {
+
+    const text =
+        question.toLowerCase();
+
+
+    /* Known BIS-related examples */
+
+    if (
+        text.includes("drinking water") ||
+        text.includes("water")
+    ) {
+
+        return "water";
+
+    }
+
+
+    if (
+        text.includes("concrete") ||
+        text.includes("cement")
+    ) {
+
+        return "concrete";
+
+    }
+
+
+    if (
+        text.includes("electrical") ||
+        text.includes("electric") ||
+        text.includes("appliance") ||
+        text.includes("kettle") ||
+        text.includes("iron")
+    ) {
+
+        return "electrical";
+
+    }
+
+
+    if (
+        text.includes("hallmark") ||
+        text.includes("gold") ||
+        text.includes("jewellery") ||
+        text.includes("jewelry")
+    ) {
+
+        return "gold";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   SEARCH BIS DATABASE
+   ========================================================= */
+
+
+async function searchBIS(question) {
+
+    const searchTerm =
+        detectSearchTerm(question);
+
+
+    let url =
+        API_URL;
+
+
+    if (searchTerm !== "") {
+
+        url +=
+            "?q=" +
+            encodeURIComponent(searchTerm);
+
+    }
+
+
+    const response =
+        await fetch(url);
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            "BIS API returned " +
+            response.status
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    return data.standards || [];
+
+}
+
+
+/* =========================================================
+   STANDARD RESULT CARD
+   ========================================================= */
+
+
+function standardCard(item) {
+
+    const number =
+        escapeHtml(item.is_number);
+
+    const title =
+        escapeHtml(item.title);
+
+    const description =
+        escapeHtml(item.description);
+
+    const category =
+        escapeHtml(item.category);
+
+    const status =
+        escapeHtml(item.status);
+
+    const year =
+        escapeHtml(item.year);
+
+    const officialUrl =
+        escapeHtml(item.official_url);
+
+
+    return `
+
+        <div class="standard-result">
+
+            <div class="standard-result-number">
+
+                ${number}
+
+            </div>
+
+            <h4>
+                ${title}
+            </h4>
+
+            <p>
+                ${description}
+            </p>
+
+            <small>
+
+                <strong>Category:</strong>
+                ${category}
+
+                &nbsp; | &nbsp;
+
+                <strong>Status:</strong>
+                ${status}
+
+                &nbsp; | &nbsp;
+
+                <strong>Year:</strong>
+                ${year}
+
+            </small>
+
+            <br><br>
+
+            <a
+                href="${officialUrl}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View Official BIS Source →
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   STANDARD ANSWER
+   ========================================================= */
+
+
+function createStandardAnswer(
+    question,
+    standards
+) {
+
+    if (
+        !standards ||
+        standards.length === 0
+    ) {
+
+        return `
+
+            I could not find a matching
+            standard in the current BIS
+            SmartAssist database.
+
+            <br><br>
+
+            You can search the official
+            BIS Know Your Standard portal
+            for a wider range of standards.
+
+            <div class="source-box">
+
+                Source:
+                <a
+                    href="${BIS_LINKS.standards}"
+                    target="_blank"
+                >
+                    BIS Know Your Standard
+                </a>
+
+            </div>
+
+        `;
+
+    }
+
+
+    let answer = `
+
+        I found
+        <strong>${standards.length}</strong>
+        relevant BIS standard(s)
+        in the SmartAssist database.
+
+    `;
+
+
+    standards
+        .slice(0, 5)
+        .forEach(item => {
+
+            answer +=
+                standardCard(item);
+
+        });
+
+
+    answer += `
+
+        <div class="source-box">
+
+            Source:
+            BIS SmartAssist Standards Database
+
+            <br>
+
+            <a
+                href="${BIS_LINKS.standards}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Open Official BIS Know Your Standard →
+            </a>
+
+        </div>
+
+    `;
+
+
+    return answer;
+
+}
+
+
+/* =========================================================
+   CERTIFICATION RESPONSE
+   ========================================================= */
+
+
+function certificationAnswer(
+    standards
+) {
+
+    let answer = `
+
+        <strong>BIS Certification Guidance</strong>
+
+        <br><br>
+
+        The certification journey generally
+        starts by identifying the applicable
+        Indian Standard for the product.
+
+        <br><br>
+
+        <strong>Typical next steps:</strong>
+
+        <ol>
+
+            <li>
+                Identify the applicable Indian Standard.
+            </li>
+
+            <li>
+                Review manufacturing,
+                process-control,
+                quality-control and testing
+                requirements.
+            </li>
+
+            <li>
+                Prepare the required
+                manufacturing and testing
+                capabilities.
+            </li>
+
+            <li>
+                Complete BIS assessment
+                and conformity testing.
+            </li>
+
+            <li>
+                Apply through the appropriate
+                official BIS service.
+            </li>
+
+        </ol>
+
+    `;
+
+
+    if (
+        standards &&
+        standards.length > 0
+    ) {
+
+        answer += `
+
+            <br>
+
+            <strong>
+                Relevant standard found:
+            </strong>
+
+        `;
+
+
+        standards
+            .slice(0, 3)
+            .forEach(item => {
+
+                answer +=
+                    standardCard(item);
+
+            });
+
+    }
+
+
+    answer += `
+
+        <div class="source-box">
+
+            Official BIS Certification Process:
+
+            <br>
+
+            <a
+                href="${BIS_LINKS.certification}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View Certification Process →
+            </a>
+
+            <br><br>
+
+            <a
+                href="${BIS_LINKS.apply}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Apply / View Official Guidance →
+            </a>
+
+        </div>
+
+    `;
+
+
+    return answer;
+
+}
+
+
+/* =========================================================
+   LABORATORY RESPONSE
+   ========================================================= */
+
+
+function laboratoryAnswer() {
+
+    return `
+
+        <strong>BIS Laboratory Services</strong>
+
+        <br><br>
+
+        BIS provides laboratory information
+        through its Laboratory Information
+        Management System (LIMS).
+
+        <br><br>
+
+        You can search for BIS recognised
+        laboratories and view their testing
+        scope.
+
+        <div class="source-box">
+
+            Official BIS LIMS:
+
+            <br>
+
+            <a
+                href="${BIS_LINKS.laboratories}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Find BIS Recognised Laboratories →
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HALLMARKING RESPONSE
+   ========================================================= */
+
+
+function hallmarkingAnswer() {
+
+    return `
+
+        <strong>BIS Hallmarking</strong>
+
+        <br><br>
+
+        Hallmarking is the official
+        determination and recording of the
+        precious-metal content of articles.
+
+        <br><br>
+
+        BIS currently provides hallmarking
+        information for precious metals such
+        as gold and silver.
+
+        <div class="source-box">
+
+            Official BIS Hallmarking FAQ:
+
+            <br>
+
+            <a
+                href="${BIS_LINKS.hallmarking}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View Hallmarking Information →
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CONSUMER RESPONSE
+   ========================================================= */
+
+
+function consumerAnswer() {
+
+    return `
+
+        <strong>BIS Consumer Support</strong>
+
+        <br><br>
+
+        If you want to report a BIS-related
+        consumer issue, BIS provides an
+        online complaint registration process.
+
+        <div class="source-box">
+
+            Official BIS Complaint Registration:
+
+            <br>
+
+            <a
+                href="${BIS_LINKS.complaints}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Register / View Complaint Guidance →
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   MAIN QUESTION PROCESSOR
+   ========================================================= */
+
+
+async function processQuestion(question) {
+
+    const text =
+        question.toLowerCase();
+
+
+    /*
+        LABORATORY
+    */
+
+    if (
+        text.includes("laboratory") ||
+        text.includes("lab") ||
+        text.includes("testing laboratory")
+    ) {
+
+        return laboratoryAnswer();
+
+    }
+
+
+    /*
+        HALLMARKING
+    */
+
+    if (
+        text.includes("hallmark") ||
+        text.includes("gold") ||
+        text.includes("jewellery") ||
+        text.includes("jewelry")
+    ) {
+
+        return hallmarkingAnswer();
+
+    }
+
+
+    /*
+        CONSUMER / COMPLAINT
+    */
+
+    if (
+        text.includes("complaint") ||
+        text.includes("consumer")
+    ) {
+
+        return consumerAnswer();
+
+    }
+
+
+    /*
+        CERTIFICATION
+    */
+
+    if (
+        text.includes("certification") ||
+        text.includes("certify") ||
+        text.includes("bis licence") ||
+        text.includes("bis license") ||
+        text.includes("isi mark")
+    ) {
+
+        const standards =
+            await searchBIS(question);
+
+        return certificationAnswer(
+            standards
+        );
+
+    }
+
+
+    /*
+        STANDARD SEARCH
+    */
+
+    const standards =
+        await searchBIS(question);
+
+
+    return createStandardAnswer(
+        question,
+        standards
+    );
+
+}
+
+
+/* =========================================================
+   SEND QUESTION
+   ========================================================= */
+
+
+async function sendQuestion() {
+
+    const input =
+        document.getElementById(
+            "questionInput"
+        );
+
+
+    const question =
+        input.value.trim();
+
+
+    if (!question) {
+
+        return;
+
+    }
+
+
+    /*
+        USER MESSAGE
+    */
+
+    addMessage(
+        escapeHtml(question),
+        "user-message"
+    );
+
+
+    input.value = "";
+
+
+    /*
+        SHOW SEARCH STATUS
+    */
+
+    showTyping();
+
+
+    try {
+
+        const answer =
+            await processQuestion(
+                question
+            );
+
+
+        removeTyping();
+
+
+        addMessage(
+            answer,
+            "bot-message"
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "SmartAssist Error:",
+            error
+        );
+
+
+        removeTyping();
+
+
+        addMessage(
+
+            `
+
+                <strong>
+                    ⚠️ Unable to connect
+                </strong>
+
+                <br><br>
+
+                SmartAssist could not connect
+                to the BIS backend.
+
+                <br><br>
+
+                Please make sure FastAPI is
+                running at:
+
+                <br><br>
+
+                <strong>
+                    http://127.0.0.1:8000
+                </strong>
+
+                <div class="source-box">
+
+                    Try again after starting
+                    the BIS SmartAssist backend.
+
+                </div>
+
+            `,
+
+            "bot-message"
+
+        );
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Standard Finder | BIS SmartAssist</title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+    <style>
+
+        /* =========================
+           STANDARD PAGE
+        ========================= */
+
+        .standard-hero {
+
+            background:
+                linear-gradient(
+                    120deg,
+                    #102f72,
+                    #264796
+                );
+
+            color: white;
+
+            padding: 65px 0;
+        }
+
+        .standard-hero h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+        .standard-hero p {
+
+            max-width: 750px;
+
+            font-size: 17px;
+
+            color: #e5ebfa;
+        }
+
+        .finder-box {
+
+            background: white;
+
+            margin-top: -35px;
+
+            position: relative;
+
+            border-radius: 6px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 35px rgba(0,0,0,.12);
+        }
+
+        .finder-form {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 180px 140px;
+
+            gap: 12px;
+        }
+
+        .finder-form input,
+        .finder-form select {
+
+            height: 50px;
+
+            border: 1px solid #ccd3df;
+
+            padding: 0 15px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .finder-form input:focus,
+        .finder-form select:focus {
+
+            border-color: #264796;
+        }
+
+        .finder-form button {
+
+            border: none;
+
+            background: #e31e24;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            border-radius: 3px;
+        }
+
+        .finder-hint {
+
+            margin-top: 12px;
+
+            color: #777;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           RESULTS
+        ========================= */
+
+        .results-section {
+
+            padding: 65px 0;
+
+            background: #f6f8fc;
+        }
+
+        #resultCount {
+
+            margin-bottom: 20px;
+
+            color: #555;
+
+            font-size: 14px;
+        }
+
+        .standard-results {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 22px;
+        }
+
+        .standard-card {
+
+            background: white;
+
+            border: 1px solid #e0e3e9;
+
+            padding: 25px;
+
+            transition: .2s;
+        }
+
+        .standard-card:hover {
+
+            box-shadow:
+                0 8px 22px rgba(0,0,0,.09);
+
+            transform: translateY(-3px);
+        }
+
+        .standard-number {
+
+            display: inline-block;
+
+            background: #eef3ff;
+
+            color: #264796;
+
+            padding: 5px 10px;
+
+            font-weight: bold;
+
+            font-size: 13px;
+
+            margin-bottom: 12px;
+        }
+
+        .standard-card h3 {
+
+            color: #264796;
+
+            margin-bottom: 10px;
+
+            font-size: 20px;
+        }
+
+        .standard-card p {
+
+            color: #666;
+
+            font-size: 14px;
+
+            margin-bottom: 15px;
+        }
+
+        .standard-meta {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            margin-bottom: 18px;
+        }
+
+        .meta-item {
+
+            background: #f7f8fa;
+
+            padding: 10px;
+
+            font-size: 12px;
+
+            color: #555;
+        }
+
+        .meta-item strong {
+
+            display: block;
+
+            color: #264796;
+
+            margin-bottom: 3px;
+        }
+
+        .standard-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+        .standard-actions a {
+
+            border: 1px solid #264796;
+
+            color: #264796;
+
+            padding: 8px 12px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .standard-actions a.primary {
+
+            background: #264796;
+
+            color: white;
+        }
+
+
+        /* =========================
+           AI BOX
+        ========================= */
+
+        .ai-standard-box {
+
+            background: white;
+
+            border-left: 5px solid #e31e24;
+
+            padding: 25px;
+
+            margin-top: 40px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.06);
+        }
+
+        .ai-standard-box h3 {
+
+            color: #264796;
+
+            margin-bottom: 8px;
+        }
+
+        .ai-standard-box p {
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        @media(max-width:800px) {
+
+            .finder-form {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .standard-results {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .standard-hero h1 {
+
+                font-size: 32px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- GOVERNMENT BAR -->
+
+<div class="gov-bar">
+
+    <div>
+        Government of India
+    </div>
+
+    <div>
+        BIS SmartAssist — SIH Prototype
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <div class="brand">
+
+            <img
+                src="../assets/bis-logo.png"
+                class="logo"
+                alt="BIS SmartAssist"
+            >
+
+            <div class="brand-text">
+
+                <h1>
+                    Bureau of Indian Standards
+                </h1>
+
+                <p>
+                    BIS SmartAssist
+                    <span>• SIH Prototype</span>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html">
+            Home
+        </a>
+
+        <a href="standards.html">
+            Standards
+        </a>
+
+        <a href="certification.html">
+            Certification
+        </a>
+
+        <a href="laboratories.html">
+            Laboratories
+        </a>
+
+        <a href="hallmarking.html">
+            Hallmarking
+        </a>
+
+        <a href="consumer.html">
+            Consumer
+        </a>
+
+        <a href="training.html">
+            Training
+        </a>
+
+        <a href="assistant.html"
+           class="ai-nav">
+            🤖 SmartAssist
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="standard-hero">
+
+    <div class="section-container">
+
+        <span class="section-label"
+              style="color:#fff">
+
+            KNOW YOUR STANDARD
+
+        </span>
+
+        <h1>
+            Smart Standard Finder
+        </h1>
+
+        <p>
+            Search Indian Standards using an IS number,
+            product name or keyword. SmartAssist can help
+            you understand the relevant standard and
+            guide you to official BIS information.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- SEARCH -->
+
+<section>
+
+    <div class="section-container">
+
+        <div class="finder-box">
+
+            <form
+                class="finder-form"
+                onsubmit="searchStandards(event)"
+            >
+
+                <input
+                    id="standardSearch"
+                    type="text"
+                    placeholder="Enter IS number or product name..."
+                >
+
+                <select id="category">
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="food">
+                        Food & Water
+                    </option>
+
+                    <option value="electrical">
+                        Electrical
+                    </option>
+
+                    <option value="construction">
+                        Construction
+                    </option>
+
+                    <option value="consumer">
+                        Consumer Products
+                    </option>
+
+                    <option value="hallmarking">
+                        Hallmarking
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    Search
+                </button>
+
+            </form>
+
+
+            <p class="finder-hint">
+
+                Example:
+                <strong>water</strong>,
+                <strong>cement</strong>,
+                <strong>electrical</strong>,
+                or an IS number.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section class="results-section">
+
+    <div class="section-container">
+
+        <div id="resultCount">
+
+            Showing example standards
+
+        </div>
+
+
+        <div
+            class="standard-results"
+            id="standardResults"
+        >
+
+            <!-- Results generated by JavaScript -->
+
+        </div>
+
+
+        <!-- AI ASSIST -->
+
+        <div class="ai-standard-box">
+
+            <h3>
+                🤖 Can't find what you're looking for?
+            </h3>
+
+            <p>
+
+                Ask BIS SmartAssist in natural language.
+                For example:
+                <strong>
+                    "Which standard should I check for drinking water?"
+                </strong>
+
+            </p>
+
+            <br>
+
+            <a
+                href="assistant.html"
+                class="hero-button"
+            >
+                Ask SmartAssist →
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   BIS SMARTASSIST - DYNAMIC STANDARD FINDER
+   Connects frontend to FastAPI + SQLite backend
+   ========================================================= */
+
+
+// ---------------------------------------------------------
+// BACKEND API URL
+// ---------------------------------------------------------
+
+const API_URL = "http://127.0.0.1:8000/api/standards";
+
+
+// ---------------------------------------------------------
+// CATEGORY MAPPING
+// ---------------------------------------------------------
+// Frontend category values → Database category names
+
+const categoryMap = {
+
+    all: null,
+
+    food: "Food and Agriculture",
+
+    electrical: "Electrical Engineering",
+
+    construction: "Civil Engineering",
+
+    consumer: "Consumer Products",
+
+    hallmarking: "Hallmarking"
+
+};
+
+
+// ---------------------------------------------------------
+// HTML SAFETY FUNCTION
+// ---------------------------------------------------------
+// Prevents database text from being directly inserted
+// as executable HTML.
+
+function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+// ---------------------------------------------------------
+// DISPLAY STANDARDS
+// ---------------------------------------------------------
+
+function displayStandards(data) {
+
+    const container =
+        document.getElementById("standardResults");
+
+    const count =
+        document.getElementById("resultCount");
+
+
+    // Clear old results
+
+    container.innerHTML = "";
+
+
+    // -----------------------------------------------------
+    // NO RESULTS
+    // -----------------------------------------------------
+
+    if (!data || data.length === 0) {
+
+        count.innerHTML =
+            "No matching BIS standard found.";
+
+        container.innerHTML = `
+
+            <div class="standard-card">
+
+                <h3>
+                    No matching standard
+                </h3>
+
+                <p>
+                    BIS SmartAssist could not find a
+                    matching standard in the available
+                    BIS database.
+                </p>
+
+                <br>
+
+                <a
+                    href="assistant.html"
+                    class="hero-button"
+                >
+                    Ask SmartAssist
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+    // -----------------------------------------------------
+    // RESULT COUNT
+    // -----------------------------------------------------
+
+    count.innerHTML =
+        `Found ${data.length} BIS standard(s)`;
+
+
+    // -----------------------------------------------------
+    // CREATE STANDARD CARDS
+    // -----------------------------------------------------
+
+    data.forEach(item => {
+
+        const number =
+            escapeHtml(item.is_number);
+
+        const title =
+            escapeHtml(item.title);
+
+        const category =
+            escapeHtml(item.category);
+
+        const description =
+            escapeHtml(item.description);
+
+        const status =
+            escapeHtml(item.status);
+
+        const year =
+            escapeHtml(item.year);
+
+        const officialUrl =
+            escapeHtml(item.official_url);
+
+
+        container.innerHTML += `
+
+            <article class="standard-card">
+
+                <span class="standard-number">
+                    ${number}
+                </span>
+
+
+                <h3>
+                    ${title}
+                </h3>
+
+
+                <p>
+                    ${description}
+                </p>
+
+
+                <div class="standard-meta">
+
+                    <div class="meta-item">
+
+                        <strong>
+                            Category
+                        </strong>
+
+                        ${category}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            Status
+                        </strong>
+
+                        ${status}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            Year
+                        </strong>
+
+                        ${year}
+
+                    </div>
+
+
+                    <div class="meta-item">
+
+                        <strong>
+                            Source
+                        </strong>
+
+                        BIS Database
+
+                    </div>
+
+                </div>
+
+
+                <div class="standard-actions">
+
+                    <a
+                        href="${officialUrl}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="primary"
+                    >
+                        Official BIS
+                    </a>
+
+
+                    <a
+                        href="assistant.html"
+                    >
+                        Ask AI
+                    </a>
+
+                </div>
+
+            </article>
+
+        `;
+
+    });
+
+}
+
+
+// ---------------------------------------------------------
+// FETCH STANDARDS FROM BACKEND
+// ---------------------------------------------------------
+
+async function loadStandards(searchQuery = "") {
+
+    const container =
+        document.getElementById("standardResults");
+
+    const count =
+        document.getElementById("resultCount");
+
+
+    // Show loading state
+
+    count.innerHTML =
+        "Searching BIS standards...";
+
+    container.innerHTML = `
+
+        <div class="standard-card">
+
+            <h3>
+                Loading...
+            </h3>
+
+            <p>
+                SmartAssist is retrieving standards
+                from the BIS database.
+            </p>
+
+        </div>
+
+    `;
+
+
+    try {
+
+        // -------------------------------------------------
+        // BUILD API URL
+        // -------------------------------------------------
+
+        let url = API_URL;
+
+
+        if (searchQuery.trim() !== "") {
+
+            url +=
+                "?q=" +
+                encodeURIComponent(searchQuery.trim());
+
+        }
+
+
+        // -------------------------------------------------
+        // CALL FASTAPI
+        // -------------------------------------------------
+
+        const response =
+            await fetch(url);
+
+
+        // Check HTTP response
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Backend returned HTTP " +
+                response.status
+            );
+
+        }
+
+
+        // Convert response to JSON
+
+        const data =
+            await response.json();
+
+
+        // -------------------------------------------------
+        // DISPLAY RESULTS
+        // -------------------------------------------------
+
+        displayStandards(
+            data.standards
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "BIS API Error:",
+            error
+        );
+
+
+        // -------------------------------------------------
+        // ERROR MESSAGE
+        // -------------------------------------------------
+
+        count.innerHTML =
+            "Unable to connect to BIS SmartAssist API.";
+
+        container.innerHTML = `
+
+            <div class="standard-card">
+
+                <h3>
+                    ⚠️ Backend Connection Error
+                </h3>
+
+                <p>
+                    The website could not connect to
+                    the BIS SmartAssist backend.
+                </p>
+
+                <p>
+                    Please make sure the FastAPI server
+                    is running at:
+                </p>
+
+                <strong>
+                    http://127.0.0.1:8000
+                </strong>
+
+                <br><br>
+
+                <button
+                    onclick="loadStandards()"
+                    style="
+                        background:#264796;
+                        color:white;
+                        border:none;
+                        padding:10px 18px;
+                        cursor:pointer;
+                        border-radius:3px;
+                    "
+                >
+                    Try Again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// SEARCH FUNCTION
+// ---------------------------------------------------------
+
+async function searchStandards(event) {
+
+    event.preventDefault();
+
+
+    // Get search text
+
+    const query =
+        document
+            .getElementById("standardSearch")
+            .value
+            .trim();
+
+
+    // Get selected category
+
+    const category =
+        document
+            .getElementById("category")
+            .value;
+
+
+    // -----------------------------------------------------
+    // FETCH FROM BACKEND
+    // -----------------------------------------------------
+
+    const container =
+        document.getElementById("standardResults");
+
+    const count =
+        document.getElementById("resultCount");
+
+
+    count.innerHTML =
+        "Searching...";
+
+    container.innerHTML = "";
+
+
+    try {
+
+        let url = API_URL;
+
+
+        // Add search query
+
+        if (query !== "") {
+
+            url +=
+                "?q=" +
+                encodeURIComponent(query);
+
+        }
+
+
+        // -------------------------------------------------
+        // API REQUEST
+        // -------------------------------------------------
+
+        const response =
+            await fetch(url);
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "API Error: " +
+                response.status
+            );
+
+        }
+
+
+        const result =
+            await response.json();
+
+
+        let standards =
+            result.standards || [];
+
+
+        // -------------------------------------------------
+        // CATEGORY FILTER
+        // -------------------------------------------------
+
+        const selectedCategory =
+            categoryMap[category];
+
+
+        if (selectedCategory) {
+
+            standards =
+                standards.filter(item => {
+
+                    return item.category
+                        .toLowerCase()
+                        .includes(
+                            selectedCategory.toLowerCase()
+                        );
+
+                });
+
+        }
+
+
+        // -------------------------------------------------
+        // DISPLAY RESULTS
+        // -------------------------------------------------
+
+        displayStandards(
+            standards
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Search Error:",
+            error
+        );
+
+
+        count.innerHTML =
+            "Search failed.";
+
+        container.innerHTML = `
+
+            <div class="standard-card">
+
+                <h3>
+                    ⚠️ Unable to search
+                </h3>
+
+                <p>
+                    Please make sure the BIS SmartAssist
+                    backend server is running.
+                </p>
+
+                <br>
+
+                <button
+                    onclick="searchStandards(event)"
+                    style="
+                        background:#264796;
+                        color:white;
+                        border:none;
+                        padding:10px 18px;
+                        cursor:pointer;
+                        border-radius:3px;
+                    "
+                >
+                    Try Again
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+// ---------------------------------------------------------
+// LOAD INITIAL STANDARDS
+// ---------------------------------------------------------
+// When standards.html opens, automatically retrieve
+// standards from SQLite through FastAPI.
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadStandards();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

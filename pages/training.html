@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Training | BIS SmartAssist</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+<style>
+
+.training-page {
+
+padding:60px 0;
+
+}
+
+.training-grid {
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:22px;
+
+margin-top:35px;
+
+}
+
+.training-card {
+
+border:1px solid #ddd;
+
+padding:25px;
+
+background:white;
+
+box-shadow:
+0 4px 15px rgba(0,0,0,.05);
+
+border-radius:6px;
+
+}
+
+.training-card h3 {
+
+color:#264796;
+
+margin-bottom:10px;
+
+}
+
+.training-card p {
+
+color:#666;
+
+font-size:14px;
+
+line-height:1.7;
+
+}
+
+.training-image {
+
+margin-top:40px;
+
+width:100%;
+
+max-height:450px;
+
+object-fit:cover;
+
+border-radius:5px;
+
+}
+
+.dynamic-section {
+
+margin-top:40px;
+
+}
+
+.dynamic-section h3 {
+
+color:#264796;
+
+margin-bottom:18px;
+
+}
+
+.benefits-grid {
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:15px;
+
+}
+
+.benefit-item {
+
+background:#f8faff;
+
+border-left:5px solid #264796;
+
+padding:18px;
+
+border-radius:4px;
+
+line-height:1.6;
+
+}
+
+.loading {
+
+text-align:center;
+
+padding:40px;
+
+color:#264796;
+
+font-weight:600;
+
+}
+
+.error {
+
+background:#fff1f1;
+
+border-left:5px solid #d93025;
+
+padding:20px;
+
+color:#8a1c1c;
+
+margin-top:30px;
+
+}
+
+.official-links {
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+margin-top:20px;
+
+}
+
+.official-link {
+
+display:inline-block;
+
+padding:12px 18px;
+
+background:#264796;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:4px;
+
+font-weight:600;
+
+}
+
+.official-link:hover {
+
+background:#102f72;
+
+}
+
+@media(max-width:800px) {
+
+.training-grid {
+
+grid-template-columns:1fr;
+
+}
+
+.benefits-grid {
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     GOVERNMENT BAR
+===================================================== -->
+
+<div class="gov-bar">
+
+<div>
+Government of India
+</div>
+
+<div>
+BIS SmartAssist — SIH Prototype
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="header-container">
+
+<div class="brand">
+
+<img
+src="../assets/bis-logo.png"
+class="logo"
+alt="BIS">
+
+<div class="brand-text">
+
+<h1>
+Bureau of Indian Standards
+</h1>
+
+<p>
+BIS SmartAssist
+<span>• SIH Prototype</span>
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<a href="../index.html">
+Home
+</a>
+
+<a href="standards.html">
+Standards
+</a>
+
+<a href="certification.html">
+Certification
+</a>
+
+<a href="laboratories.html">
+Laboratories
+</a>
+
+<a href="hallmarking.html">
+Hallmarking
+</a>
+
+<a href="consumer.html">
+Consumer
+</a>
+
+<a href="training.html">
+Training
+</a>
+
+<a href="assistant.html"
+class="ai-nav">
+🤖 SmartAssist
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- =====================================================
+     TRAINING PAGE
+===================================================== -->
+
+<section class="training-page">
+
+<div class="section-container">
+
+
+<div class="section-heading">
+
+<span>
+TRAINING & CAPACITY BUILDING
+</span>
+
+<h2>
+Learn About Standards
+</h2>
+
+<p>
+Explore training, workshops and
+standards-awareness resources.
+</p>
+
+</div>
+
+
+<!-- =====================================================
+     TRAINING IMAGE
+===================================================== -->
+
+<img
+src="../assets/training.jpg"
+class="training-image"
+alt="BIS Training">
+
+
+<!-- =====================================================
+     DYNAMIC TRAINING CONTENT
+===================================================== -->
+
+<div id="trainingContent">
+
+<div class="loading">
+
+Loading BIS Training information...
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+const API_URL =
+"http://127.0.0.1:8000/api/training";
+
+
+async function loadTraining() {
+
+const container =
+document.getElementById(
+"trainingContent"
+);
+
+
+try {
+
+
+const response =
+await fetch(API_URL);
+
+
+if (!response.ok) {
+
+throw new Error(
+"Unable to connect to BIS SmartAssist API."
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+const training =
+data.training;
+
+
+/* =====================================================
+   TRAINING PROGRAMMES
+===================================================== */
+
+let html = `
+
+<div class="training-grid">
+
+${training.programmes.map(
+programme => `
+
+<div class="training-card">
+
+<h3>
+${programme.title}
+</h3>
+
+<p>
+${programme.description}
+</p>
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+`;
+
+
+/* =====================================================
+   BENEFITS
+===================================================== */
+
+html += `
+
+<div class="dynamic-section">
+
+<h3>
+🎯 Training Benefits
+</h3>
+
+<div class="benefits-grid">
+
+${training.benefits.map(
+(benefit, index) => `
+
+<div class="benefit-item">
+
+<strong>
+${index + 1}.
+</strong>
+
+${benefit}
+
+</div>
+
+`
+).join("")}
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   OFFICIAL BIS RESOURCES
+===================================================== */
+
+html += `
+
+<div class="dynamic-section">
+
+<h3>
+🔗 Official BIS Training Resources
+</h3>
+
+<div class="official-links">
+
+<a
+href="${training.official_links.training_programmes}"
+target="_blank"
+class="official-link">
+
+Training Programmes →
+
+</a>
+
+<a
+href="${training.official_links.training_calendar}"
+target="_blank"
+class="official-link">
+
+Training Calendar →
+
+</a>
+
+<a
+href="${training.official_links.bis_home}"
+target="_blank"
+class="official-link">
+
+BIS Official Website →
+
+</a>
+
+</div>
+
+</div>
+
+`;
+
+
+/* =====================================================
+   INSERT CONTENT
+===================================================== */
+
+container.innerHTML = html;
+
+
+}
+
+catch (error) {
+
+
+container.innerHTML = `
+
+<div class="error">
+
+<h3>
+Unable to load Training information
+</h3>
+
+<p>
+${error.message}
+</p>
+
+<p>
+Please make sure the BIS SmartAssist
+backend server is running.
+</p>
+
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =====================================================
+   LOAD PAGE
+===================================================== */
+
+loadTraining();
+
+</script>
+
+
+</body>
+
+</html>
